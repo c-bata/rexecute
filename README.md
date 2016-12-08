@@ -1,6 +1,6 @@
 # rexecute
 
-Re execute the command when specified files are updated.
+Re-execute the command when specified files are modified.
 
 ## Installation
 
