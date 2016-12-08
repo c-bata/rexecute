@@ -8,6 +8,8 @@ import (
 	"time"
 )
 
+const interval int = 1
+
 // RunCmd is a function to run a external command.
 func RunCmd(c []string) {
 	cmd := exec.Command(c[0], c[1:]...)
@@ -45,6 +47,6 @@ func main() {
 				RunCmd(os.Args[1:])
 			}
 		}
-		time.Sleep(1 * time.Second)
+		time.Sleep(time.Duration(interval) * time.Second)
 	}
 }
