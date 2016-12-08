@@ -8,3 +8,9 @@ Re execute the command when specified files are updated.
 $ find . -name "*.tex" | rexecute make build
 ```
 
+![rexecute demo](./rexecute-demo.gif)
+
+## License
+
+MIT License@Masashi Shibata
+
