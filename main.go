@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// RunCmd is a function to run a external command.
 func RunCmd(c []string) {
 	cmd := exec.Command(c[0], c[1:]...)
 	out, err := cmd.Output()
