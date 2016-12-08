@@ -4,8 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"time"
 	"os/exec"
+	"time"
 )
 
 func RunCmd(c []string) {
