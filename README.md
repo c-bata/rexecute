@@ -2,6 +2,12 @@
 
 Re execute the command when specified files are updated.
 
+## Installation
+
+```console
+$ go install github.com/c-bata/rexecute
+```
+
 ## Design
 
 ```console
