@@ -8,6 +8,16 @@ import (
 	"os/exec"
 )
 
+func RunCmd(c []string) {
+	cmd := exec.Command(c[0], c[1:]...)
+	out, err := cmd.Output()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("%s", out)
+}
+
 func main() {
 	s := bufio.NewScanner(os.Stdin)
 	files := make(map[string]time.Time)
@@ -30,15 +40,8 @@ func main() {
 			mtime := fi.ModTime()
 			if mtime.After(v) {
 				files[k] = mtime
-				fmt.Println(k)
-
-				cmd := exec.Command(os.Args[1], os.Args[2:]...)
-				out, err := cmd.Output()
-				if err != nil {
-					fmt.Println(err)
-					return
-				}
-				fmt.Printf("%s", out)
+				fmt.Printf("%s is changed!\n", k)
+				RunCmd(os.Args[1:])
 			}
 		}
 		time.Sleep(1 * time.Second)
