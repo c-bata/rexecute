@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"time"
+	"os/exec"
 )
 
 func main() {
@@ -28,9 +29,16 @@ func main() {
 			}
 			mtime := fi.ModTime()
 			if mtime.After(v) {
-				// TODO: Run cmd.
-				fmt.Println(k)
 				files[k] = mtime
+				fmt.Println(k)
+
+				cmd := exec.Command(os.Args[1], os.Args[2:]...)
+				out, err := cmd.Output()
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+				fmt.Printf("%s", out)
 			}
 		}
 		time.Sleep(1 * time.Second)
