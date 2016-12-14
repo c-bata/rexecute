@@ -31,7 +31,6 @@ func main() {
 			return
 		}
 		files[f] = fi.ModTime()
-		fmt.Println(f)
 	}
 
 	for {
