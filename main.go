@@ -8,17 +8,14 @@ import (
 	"time"
 )
 
-const interval int = 1
+const intervalDuration = 1 * time.Second
 
-// RunCmd is a function to run a external command.
-func RunCmd(c []string) {
+func run(c []string) {
 	cmd := exec.Command(c[0], c[1:]...)
-	out, err := cmd.Output()
-	if err != nil {
-		fmt.Println(err)
-		return
+	if err := cmd.Run(); err != nil {
+		_, _ = fmt.Fprintln(os.Stderr, "[rexecute] error:", err)
+		os.Exit(1)
 	}
-	fmt.Printf("%s", out)
 }
 
 func main() {
@@ -42,10 +39,10 @@ func main() {
 			mtime := fi.ModTime()
 			if mtime.After(v) {
 				files[k] = mtime
-				fmt.Printf("%s is changed!\n", k)
-				RunCmd(os.Args[1:])
+				_, _ = fmt.Fprintln(os.Stderr, "[rexecute] changed:", k)
+				run(os.Args[1:])
 			}
 		}
-		time.Sleep(time.Duration(interval) * time.Second)
+		time.Sleep(intervalDuration)
 	}
 }
